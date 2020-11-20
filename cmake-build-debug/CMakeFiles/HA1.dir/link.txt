@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread -g   CMakeFiles/HA1.dir/main.cpp.o  -o HA1  /usr/lib/x86_64-linux-gnu/libpng.so 
