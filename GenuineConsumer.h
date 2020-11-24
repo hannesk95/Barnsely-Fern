@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <string>
-#include "Consumer.h"
 #include <cmath>
 #include <mutex>
 #include <vector>
+#include "Consumer.h"
 
 #define cimg_display 0
 #include "CImg.h"
@@ -18,23 +18,27 @@
 #define Y_MIN (0)
 #define Y_MAX (10)
 
+/// Class which converts data points into pixel values and draws the image.
 class GenuineConsumer : public Consumer<std::pair<float, float>>
 {
 private:
 
-    static cimg_library::CImg<unsigned char> fractal;
-    static int numConsumers;
-    static bool saveImage;
-    static std::vector<std::mutex> vecMutex;
+    static cimg_library::CImg<unsigned char> fractal;   // Member variable which serves as image database.
+    static int numConsumers;                            // Member variable which stores the active Consumer objects.
+    static std::vector<std::mutex> vecMutex;            // Vector which includes mutexes for image access management.
 
 
 public:
+    /// Constructor of GenuineConsumer class.
+    /// \param buffer - Reference to Buffer object, in order to be able to invoke inherited constructor.
+    /// \param numConsumers - Reference which gives number of initial consumer objects.
     GenuineConsumer(Buffer<std::pair<float, float>>& buffer, int numConsumers) : Consumer<std::pair<float, float>>(buffer)
     {
-        //std::cout << "Genuine Consumer Object created!" << std::endl;
         this->numConsumers = numConsumers;
     }
 
+    /// Destructor of GenuineProducer class.
+    /// Destructor checks number of active consumer objects. Last consumer object saves image.
     ~GenuineConsumer()
     {
         if(this->numConsumers == 1)
@@ -43,45 +47,49 @@ public:
             this->numConsumers--;
     }
 
-    float xPixel(float xValue)
+    /// Method converts x value of data point into x pixel value.
+    /// \param xValue indicating the first value of float pair.
+    /// \return x pixel value.
+    void xPixel(float& xValue)
     {
-        return float(xValue - X_MIN) * X_DIM / (X_MAX - X_MIN);
+        xValue = (xValue - X_MIN) * X_DIM / (X_MAX - X_MIN);
     }
 
-    float yPixel(float& yValue)
+    /// Method converts y value of data point into y pixel value.
+    /// \param yValue xValue indicating the second value of float pair.
+    /// \return y pixel value.
+    void yPixel(float& yValue)
     {
-        return float(yValue - Y_MIN) * Y_DIM / (Y_MAX - Y_MIN);
+        yValue = (yValue - Y_MIN) * Y_DIM / (Y_MAX - Y_MIN);
     }
 
-    /**
-     *
-     * @param cooordinate
-     * @return
-     */
-    bool consume(std::pair<float, float>& cooordinate)
+    /// Implementation of virtual method "consume" of parent Consumer class.
+    /// Method further processes data point pulled from buffer and assign corresponding pixel value of image.
+    /// \param cooordinate - is the unit (i.e. pair) in which the two objects (x & y value) are stored in.
+    /// \return False, as consumer can not decide whether thread has finished or not.
+    bool consume(std::pair<float, float>& coordinate)
     {
-        int xValue = ceil(xPixel(cooordinate.first));
-        int yValue = ceil(yPixel(cooordinate.second));
+        xPixel(coordinate.first);
+        yPixel(coordinate.second);
 
-        std::cout << "x-Pixel value: " << xValue << std::endl;
-        std::cout << "y-Pixel value: " << yValue << std::endl;
+        int xValue = ceil(coordinate.first);
+        int yValue = ceil(coordinate.second);
 
-        std::lock_guard<std::mutex> guard(vecMutex[xValue]);
-        {
-            unsigned char *pixel_value = fractal.data((xValue), yValue, 0, 0);
+        std::lock_guard<std::mutex> lock(this->vecMutex[xValue]);
 
-            if ((*pixel_value) < 255)
-                fractal(xValue, yValue, 0, 0) = (*pixel_value) + 255;
+        unsigned char *pixel_value = fractal.data((xValue), yValue, 0, 0);
 
-        }
+        if ((*pixel_value) < 255)
+            fractal(xValue, yValue, 0, 0) = (*pixel_value) + 1;
+
         return false;
     }
 
 };
 
+// Initialize static member variables
 cimg_library::CImg<unsigned char> GenuineConsumer::fractal = cimg_library::CImg<unsigned char>(X_DIM, Y_DIM, 1, 1);
 int GenuineConsumer::numConsumers = 0;
-bool GenuineConsumer::saveImage = false;
 std::vector<std::mutex> GenuineConsumer::vecMutex(10000);
 
 #endif //HA1_GENUINECONSUMER_H

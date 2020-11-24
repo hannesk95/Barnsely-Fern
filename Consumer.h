@@ -5,20 +5,30 @@
 #include "Worker.h"
 #include "Buffer.h"
 
+/// Class which takes care of emptying the buffer elementwise.
+/// \tparam T - template class
 template<typename T> class Consumer : public Worker
 {
 private:
-    Buffer<T>& m_buffer;
+    Buffer<T>& m_buffer;    // Member variable which is used by Consumer objects to pull data points from
 
 public:
-
+    /// Constructor of Consumer class.
+    /// \param buffer - Reference to Buffer object, which will be used to pull data points from.
     Consumer(Buffer<T>& buffer) : Worker(), m_buffer(buffer)
     {
-        std::cout << "Consumer object created!" << std::endl;
+        // Empty constructor.
+    }
 
-        //this->m_buffer = buffer;
-    };
+    /// Destructor of Consumer class.
+    ~Consumer()
+    {
+        // Empty destructor.
+    }
 
+    /// Implementation of virtual method "step" of parent Worker class.
+    /// Method pulls data point from buffer and invokes "consume" for further processing.
+    /// \return False, as consumer can not decide whether thread has finished or not.
     bool step() override
     {
         T element;
@@ -28,10 +38,11 @@ public:
         {
             try
             {
-                //std::cout << "Pop element from buffer..." << std::endl;
-                element = m_buffer.pop();
+                // 1. Pull datapoint from buffer
+                m_buffer.pop(element);
+
+                // 2. Process popped datapoint
                 terminate = consume(element);
-                //std::cout << "Current elements in buffer: " << m_buffer.size() << std::endl;
             }
             catch (const std::runtime_error& error)
             {
@@ -43,8 +54,11 @@ public:
     }
 
 protected:
+    /// Virtual method which has to be implemented in child class GenuineConsumer
+    /// \param element - takes reference to element of datatype T (template) as input.
+    /// \return False, as consumer can not decide whether thread has finished or not.
     virtual bool consume(T& element)
-    { return 0; };
+    { return 0; }  // Without return 0 compiler gives warning.
 };
 
 #endif //HA1_CONSUMER_H

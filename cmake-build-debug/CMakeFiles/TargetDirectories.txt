@@ -1,3 +1,0 @@
-/mnt/c/Users/Johan/CLionProjects/HA1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/Johan/CLionProjects/HA1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Johan/CLionProjects/HA1/cmake-build-debug/CMakeFiles/HA1.dir

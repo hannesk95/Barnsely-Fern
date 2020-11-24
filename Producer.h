@@ -3,50 +3,55 @@
 
 #include <iostream>
 #include <condition_variable>
-
 #include "Buffer.h"
 #include "Worker.h"
 
+/// Class which takes care of filling the buffer with elements.
+/// \tparam T - template class
 template<typename T> class Producer : public Worker
 {
 private:
-    Buffer<T>& m_buffer;
+    Buffer<T>& m_buffer;    // Member variable which is used to store data points by Producer objects
 
 public:
+    /// Constructor of Producer class.
+    /// \param buffer - Reference to Buffer object, which will be used to push data points into and store.
     Producer(Buffer<T>& buffer) : Worker(), m_buffer(buffer)
     {
-        std::cout << "Producer object created!" << std::endl;
-        //this->m_buffer = buffer;
+        // Empty constructor.
     };
 
+    /// Destructor of Producer class.
     ~Producer()
     {
-        std::cout << "Producer object deleted!" << std::endl;
+        // Empty destructor.
     };
 
+    /// Implementation of virtual method "step" of parent Worker class.
+    /// Method invokes "produce" in order to create data point and store produced data point in buffer object.
+    /// \return True - if job is done, False - otherwise.
     bool step() override
     {
-       T element;
-       bool terminate = false;
+        T element;
+        bool terminate = false;
 
-        //for (int n=0; n<100000; n++)
         while(!terminate)
         {
             // 1. Create new datapoint
             terminate = produce(element);
 
-            // 2. Push datapoint into buffer if free capacity is left
-            // otherwise block current thread
-            std::cout << "Push new element into buffer..." << std::endl;
+            // 2. Push datapoint into buffer
             m_buffer.push(element);
-            std::cout << "Current elements in buffer: " << m_buffer.size() << std::endl;
         }
         return terminate;
     }
 
 protected:
+    /// Virtual method which has to be implemented in child class GenuineProducer
+    /// \param element - takes reference to element of datatype T (template) as input.
+    /// \return True - if job is done, False - otherwise.
     virtual bool produce(T& element)
-    { return 0; };
+    { return 0; }  // Without return 0 compiler gives warning.
 };
 
 #endif //HA1_PRODUCER_H
