@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-project(HA1)
+project(BarnselyFern)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS -pthread)
 
-add_executable(HA1 main.cpp Worker.h Producer.h Buffer.h GenuineProducer.h Consumer.h GenuineConsumer.h)
+set(SRC_FILES main.cpp Worker.h Producer.h Buffer.h GenuineProducer.h Consumer.h GenuineConsumer.h
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # If CImg shall use built in png (for some reason ImageMagick does not work right now)
 set(YOU_NEED_PNG 1)
