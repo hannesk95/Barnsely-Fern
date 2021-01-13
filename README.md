@@ -4,7 +4,7 @@
 
 This project uses C++ multithreading (producer-consumer model) in order to draw the well known [Barnsley fern](<https://en.wikipedia.org/wiki/Barnsley_fern>). 
 
-![](./assets/fern_image.png =100x20)
+![](./assets/fern_image.png =1000x200)
 
 ---
 
