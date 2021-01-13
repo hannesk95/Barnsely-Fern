@@ -2,7 +2,7 @@
 ---
 ### Preface
 
-This project uses C++ multithreading (producer-consumer model) in order to draw the well known [Barnsley fern](<https://en.wikipedia.org/wiki/Barnsley_fern>). 
+This project uses C++ multithreading (producer-consumer model) in order to draw the well known [Barnsley fern](<https://en.wikipedia.org/wiki/Barnsley_fern>) (see resulting image below). 
 
 <h2 align="center">
   <img src="assets/fern_image.png" alt="resulting barnsley fern" width="300px" />
@@ -20,6 +20,8 @@ This project uses C++ multithreading (producer-consumer model) in order to draw 
 
 - [CMake](https://cmake.org/) - Platform for build automation, testing and packaging using a compiler-independent method
 <br/> `sudo apt-get install cmake`
+
+---
 
 ### Execution
 
