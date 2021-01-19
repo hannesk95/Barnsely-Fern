@@ -21,6 +21,7 @@ This project uses C++ multithreading (producer-consumer model) in order to draw 
 - [CMake](https://cmake.org/) - Platform for build automation, testing and packaging using a compiler-independent method
 <br/> `sudo apt-get install cmake`
 <br/> `sudo apt-get install build-essential` (may also be needed)
+<br/> `sudo apt-get install imagemagick libpng-dev zlib1g-dev`
 
 ---
 
