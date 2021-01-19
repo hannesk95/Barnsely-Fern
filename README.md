@@ -30,6 +30,6 @@ This project uses C++ multithreading (producer-consumer model) in order to draw 
 
 In order to make use of the code, please invoke `make compile` in the root directory of this repository. Subsequently:
 1. `cd src/`
-2. `cd build`
+2. `cd build/`
 3. `./BarnselyFern`
 
