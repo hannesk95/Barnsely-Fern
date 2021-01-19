@@ -4,7 +4,7 @@ project(BarnselyFern)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS -pthread)
 
-set(SRC_FILES main.cpp Worker.h Producer.h Buffer.h GenuineProducer.h Consumer.h GenuineConsumer.h
+set(SRC_FILES Buffer.h Consumer.h GenuineConsumer.h GenuineProducer.h Producer.h Worker.h main.cpp)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # If CImg shall use built in png (for some reason ImageMagick does not work right now)
