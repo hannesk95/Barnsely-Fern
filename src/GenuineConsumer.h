@@ -42,7 +42,7 @@ public:
     ~GenuineConsumer()
     {
         if(this->numConsumers == 1)
-            fractal.save_png("fern_image.png");
+            fractal.save_png("../../assets/fern_image.png");
         else
             this->numConsumers--;
     }
