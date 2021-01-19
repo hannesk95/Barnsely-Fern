@@ -7,9 +7,7 @@ clean: remove_srcfiles
 compile: clean
 	mkdir -p src/build/
 	cd src/build/ && cmake -DCMAKE_BUILD_TYPE=Release ..
-	$(MAKE) -C src/build/
-	cd src/build/ ./BarnselyFern
-	#mv src/build/barnsley_fern barnsley_fern
+	$(MAKE) -C src/build/	
 
 remove_srcfiles:
 	rm -rf src/.idea
