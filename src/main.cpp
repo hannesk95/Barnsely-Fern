@@ -35,6 +35,8 @@ int main()
     for (auto& c : consumers) c->start_work();
 
     std::cout << "Job started!" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "According to the number of iterations, this may take a while..." << std::endl;
 
     // Join producer and consumer threads with main thread
     for (auto& p : producers) p->join_thread();
