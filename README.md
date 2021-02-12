@@ -5,7 +5,7 @@
 This project showcases a producer-consumer model using mutual exclusions (Mutex) using C++ in order to draw the well known [`Barnsley fern`](<https://en.wikipedia.org/wiki/Barnsley_fern>) (see resulting image below). Therein, the computational workload can distributed among several workers in order to speed up the entire process. The number of workers is selectable and can be adjusted according to the computational hardware at hand. 
 
 <h2 align="center">
-  <img src="assets/fern_image.png" alt="resulting barnsley fern" width="300px" />
+  <img src="assets/fern_image.png" alt="resulting barnsley fern" width="800px" />
 </h2>
 
 ---
