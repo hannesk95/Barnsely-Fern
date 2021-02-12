@@ -1,4 +1,4 @@
-# HPC Consumer-Producer Model using Mutex in C++
+# Consumer-Producer Model using Mutex in C++
 ---
 ### Preface
 
