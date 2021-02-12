@@ -1,4 +1,4 @@
-# HPC Consumer-Producer Problem using C++
+# HPC Consumer-Producer Model using C++
 ---
 ### Preface
 
