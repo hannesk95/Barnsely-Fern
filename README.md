@@ -1,8 +1,8 @@
-# C++ Multithreading
+# HPC Consumer-Producer Problem using C++
 ---
 ### Preface
 
-This project uses C++ multithreading (producer-consumer model) in order to draw the well known [Barnsley fern](<https://en.wikipedia.org/wiki/Barnsley_fern>) (see resulting image below). 
+This project uses C++ multithreading (producer-consumer model) in order to draw the well known [Barnsley fern](<https://en.wikipedia.org/wiki/Barnsley_fern>) (see resulting image below). The computational workload is distributed among several workers in order to speed up the entire process. 
 
 <h2 align="center">
   <img src="assets/fern_image.png" alt="resulting barnsley fern" width="300px" />
