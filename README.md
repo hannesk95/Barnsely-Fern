@@ -1,4 +1,4 @@
-# C++ Multithreading - Barnsely Fern
+# C++ Multithreading
 ---
 ### Preface
 
